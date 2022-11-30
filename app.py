@@ -143,7 +143,7 @@ def admin_signup():
 
 
 @app.route("/add_student")
-@login_required(role="ADMIN")
+@login_required
 def add_stu():
     form = StudentDetailForm()
 
@@ -165,7 +165,7 @@ def add_stu():
 
 
 @app.route("/list_student")
-@login_required(role="ADMIN")
+@login_required
 def list_stu():
     students = Student.query.all()
 
@@ -216,13 +216,13 @@ def signup():
     return render_template('sign-up.html', form=form)
 
 @app.route("/dashboard")
-@login_required()
+@login_required
 def dash():
     return render_template('dashboard.html', name = current_user.username)
 
 
 @app.route("/logout")
-@login_required()
+@login_required
 def logout():
     flash("You have been logged out")
     logout_user()
