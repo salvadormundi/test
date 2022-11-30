@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('.static', filename='login.css') }}">
+    <title>ODISHA ALUMNI | LOG IN</title>
+</head>
+<body>
+    <section class="wrapper">
+        <div class="container">
+            <form action="" method="post" class="login--form">
+                {{form.csrf_token}}
+                <div class="title">Alumni Portal</div>
+                <div class="subtitle">Log In</div>
+                {{ form.username(class_='name', placeholder='Name') }}
+                {{ form.password(class_='pass', placeholder='Password')}}
+                <!-- <input class="shw--psd" type="checkbox" onclick="pass_toggle()"> -->
+                <!-- <input type="text" class="name" placeholder="Username">
+                <input type="text" class="pass" placeholder="Password"> -->
+                <label class="check">
+                    {{ form.remember(class_='remember')}} Remember me
+                    <!-- <input type="checkbox" value="remember-me" class="remember"> Remember me -->
+                    
+                </label>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class=flashes>{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %} 
+                
+                <input type="submit" value="Log In" class="form--btn" formaction="#">
+            </form>
+            <a class="redir" href="{{url_for('signup')}}">
+                <button id="outside" class="form--btn">Sign Up</button>
+            </a>
+        </div>
+    </section>
+</body>
+</html>

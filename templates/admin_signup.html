@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{url_for('.static', filename='signup.css')}}">
+    <title>ADMIN | SIGN UP</title>
+</head>
+<body>
+    <section class="wrapper">
+        <div class="container">
+            <form action="" method="post" class="login--form">
+                {{form.csrf_token}}
+                <div class="title">ADMIN SIGNUP</div>
+                <div class="subtitle">Create Account</div>
+                {{ form.username(class_='name', placeholder='Name') }}
+                
+                {{ form.password(class_='pass', placeholder='Password') }}
+                
+                {{ form.email(class_='email', placeholder='Email') }}
+                {% for error in form.email.errors %}
+                <span class="error">
+                    {{error}}
+                </span>
+                {% endfor %}
+
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="flashes">{{ message }}</div>
+                    <a class="redir" href="{{url_for('admin_login')}}">
+                        Go to the login page here
+                    </a>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+                
+                <!-- <input type="text" class="name" placeholder="Username">
+                <input type="text" class="pass" placeholder="Password">
+                <input type="text" class="email" placeholder="Email">
+                <input type="text" class="coll" placeholder="Institution"> -->
+
+                <input type="submit" value="Sign Up" class="form--btn">
+
+            </form>
+        </div>
+    </section>
+</body>
+</html>

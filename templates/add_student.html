@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMIN | DASHBOARD</title>
+</head>
+<body>
+    <form action="{{ url_for('add_student') }}" method="post" class="login--form">
+        {{form.csrf_token}}
+        <div class="title">Alumni Portal</div>
+        <div class="subtitle">Log In</div>
+        {{ form.name(class_='name', placeholder='Name') }}
+        {{ form.email(class_='pass', placeholder='Email')}}
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class=flashes>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %} 
+        <!-- <input class="shw--psd" type="checkbox" onclick="pass_toggle()"> -->
+        <!-- <input type="text" class="name" placeholder="Username">
+        <input type="text" class="pass" placeholder="Password"> --> 
+        <input type="submit" value="Add Student" class="form--btn" formaction="#">
+    </form>
+    <div>
+        <form action="{{ url_for('list_student') }}" method="post" class="login--form"></form>
+            <ul>
+                {{% for student in students %}}
+                <li>{{ student.text }}</li>
+                {{% endfor %}}
+            </ul>
+        </form>
+    </div>
+</body>
+</html>

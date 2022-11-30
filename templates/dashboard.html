@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ODISHA ALUMNI | DASHBOARD</title>
+    <link rel="stylesheet" href="{{ url_for('.static', filename='dash.css') }}">
+
+    <script src="../static/js/jquery-3.6.1.min.js"></script>
+</head>
+<body>
+
+    <div class="wrap">
+
+    <div class="sidebar">
+        <!--<div id="menu" onclick="myFunction()">-->
+            <img src="../static/menu icon.png" alt="" id="menu">
+        
+        <div class="h--wrap">
+            <h1>Dashboard</h1>
+        </div>
+        
+        <ul>
+            <li>Hello, {{name}}</li>
+            <li><a href="">Profile</a></li>
+            <li><a href="">Chat</a></li>
+            <li><a href="">Events</a></li>
+            <li><a href="">Contact Us</a></li>
+            <li><a href="">About Us</a></li>
+            <li><a href="{{ url_for('logout') }}">Sign out</a></li>
+
+
+        </ul>
+    </div>
+
+    <section class="main">
+        
+    </section>
+    </div>
+
+    <script>
+         $(document).ready(function(){
+          $("#menu").click(function(){
+               $(".sidebar").toggleClass("opensidebar");
+              
+           });
+        });
+        //function myFunction(){
+        //document.getElementById("menu").style.display = "none";}
+      </script>
+</body>
+</html>
