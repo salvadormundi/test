@@ -103,73 +103,73 @@ def index():
 
 # admin auth
 
-@app.route("/adminlogin", methods=['GET', 'POST'])
-def admin_login():
-    form = AdminLoginForm()
+# @app.route("/adminlogin", methods=['GET', 'POST'])
+# def admin_login():
+#     form = AdminLoginForm()
 
-    if form.validate_on_submit():
-        admin = Admin.query.filter_by(username=form.username.data).first()
-        if admin and check_password_hash(admin.password, form.password.data):
-            login_user(admin, remember=form.remember.data)
-            return redirect(url_for('dash'))
-        else:
-            flash('Invalid Admin Credentials')
-            return render_template("admin_login.html", form=form)
-    return render_template('admin_login.html', form=form)
+#     if form.validate_on_submit():
+#         admin = Admin.query.filter_by(username=form.username.data).first()
+#         if admin and check_password_hash(admin.password, form.password.data):
+#             login_user(admin, remember=form.remember.data)
+#             return redirect(url_for('dash'))
+#         else:
+#             flash('Invalid Admin Credentials')
+#             return render_template("admin_login.html", form=form)
+#     return render_template('admin_login.html', form=form)
 
 
-@app.route("/adminsignup", methods=['GET', 'POST'])
-def admin_signup():
-    form = AdminRegistrationForm()
+# @app.route("/adminsignup", methods=['GET', 'POST'])
+# def admin_signup():
+#     form = AdminRegistrationForm()
 
-    if form.validate_on_submit():
-        hashed_pass = generate_password_hash(form.password.data, method='sha256')
+#     if form.validate_on_submit():
+#         hashed_pass = generate_password_hash(form.password.data, method='sha256')
 
-        new_admin = Admin(
-            username=form.username.data, 
-            email=form.email.data, 
-            password=hashed_pass)
+#         new_admin = Admin(
+#             username=form.username.data, 
+#             email=form.email.data, 
+#             password=hashed_pass)
         
-        try:
-            db.session.add(new_admin)
-            db.session.commit()
-            flash("Admin registered")
-        except IntegrityError:
-            flash("Admin already registered")
-            db.session.rollback()
+#         try:
+#             db.session.add(new_admin)
+#             db.session.commit()
+#             flash("Admin registered")
+#         except IntegrityError:
+#             flash("Admin already registered")
+#             db.session.rollback()
     
     
-    return render_template('admin_signup.html', form=form)
+#     return render_template('admin_signup.html', form=form)
 
 
-@app.route("/add_student")
-@login_required
-def add_stu():
-    form = StudentDetailForm()
+# @app.route("/add_student")
+# @login_required
+# def add_stu():
+#     form = StudentDetailForm()
 
-    if form.validate_on_submit():
-        new_stu = Student(
-            name=form.name.data,
-            email = form.email.data
-        )
-        try:
-            db.session.add(new_stu)
-            db.session.commit()
-            flash("Student added")
-        except IntegrityError:
-            flash("Each student should have different email")
-            db.session.rollback()
+#     if form.validate_on_submit():
+#         new_stu = Student(
+#             name=form.name.data,
+#             email = form.email.data
+#         )
+#         try:
+#             db.session.add(new_stu)
+#             db.session.commit()
+#             flash("Student added")
+#         except IntegrityError:
+#             flash("Each student should have different email")
+#             db.session.rollback()
 
-    return render_template('add_student.html', name = current_user.username)
+#     return render_template('add_student.html', name = current_user.username)
 
 
 
-@app.route("/list_student")
-@login_required
-def list_stu():
-    students = Student.query.all()
+# @app.route("/list_student")
+# @login_required
+# def list_stu():
+#     students = Student.query.all()
 
-    return render_template('add_student.html', students=students)
+#     return render_template('add_student.html', students=students)
 
 
 
