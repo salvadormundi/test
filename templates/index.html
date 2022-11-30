@@ -10,8 +10,6 @@
     <h1>WELCOME TO ODISHA ALUMNI PORTAL</h1>
     <a href="{{url_for('login')}}">LOGIN</a>
     <a href="{{url_for('signup')}}">SIGNUP</a>
-    <a href="{{url_for('admin_login')}}">ADMIN LOGIN</a>
-    <a href="{{url_for('admin_signup')}}">ADMIN SIGNUP</a>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
         {% for message in messages %}
