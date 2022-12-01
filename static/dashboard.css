@@ -112,3 +112,16 @@
 #google_translate_element{
     float: right;
 }
+
+.chat--icon{
+    width: 96px;
+    height: 96px;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 90%;
+    left: 100%;
+    background: url('./icons8-chat-room-96.png');
+    background-size: 75%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}

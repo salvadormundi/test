@@ -27,6 +27,8 @@
                 {% endfor %}
                 {{ form.institution(class_='coll', placeholder='Institution') }}
 
+                {{ form.regdid(class_='coll', placeholder='Regd. Id.') }}
+
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {% for message in messages %}

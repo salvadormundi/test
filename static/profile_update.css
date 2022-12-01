@@ -4,8 +4,9 @@
 }
 
 
-form--wrapper{
+.form--wrapper{
     display: flex;
+    width: 100vw;
     justify-content: center;
     height: 90vh;
     align-items: center;

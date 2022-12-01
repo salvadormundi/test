@@ -1,4 +1,3 @@
-from functools import wraps
 from sqlalchemy.exc import IntegrityError
 from flask import Flask, flash, render_template, redirect, url_for
 from flask_wtf import FlaskForm
@@ -6,6 +5,7 @@ from wtforms import StringField, PasswordField, BooleanField, IntegerField
 from wtforms.validators import InputRequired, Email, Length, NumberRange
 from flask_sqlalchemy import SQLAlchemy
 import os
+
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
@@ -18,6 +18,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(30), unique=True)
     institution = db.Column(db.String(40))
+    regdid = db.Column(db.String(40))
     institute_name_10 = db.Column(db.String(40))
     institute_pass_10 = db.Column(db.Integer)
     institute_name_12 = db.Column(db.String(40))
@@ -29,7 +30,6 @@ class User(db.Model, UserMixin):
     
     def __repr__(self) -> str:
         return self.username
-
 
 
 class Admin(db.Model, UserMixin):
@@ -89,6 +89,8 @@ class RegistrationForm(FlaskForm):
     password = StringField("password", validators=[InputRequired(), Length(min=4, max=30)])
     email = StringField("email", validators=[InputRequired(), Email(message="Invalid Email")])
     institution = StringField("institution", validators=[InputRequired(), Length(min=10, max=40)])
+    regdid = StringField('regdid', validators=[InputRequired(), Length(min=10, max=40)])
+    
 
 
 class AdminLoginForm(FlaskForm):
@@ -114,6 +116,24 @@ class UpdateProfileForm(FlaskForm):
     institute_pass_12 = IntegerField("institute_grade_12", validators=[InputRequired(), NumberRange(min=1900, max=2100)])
     residence = StringField("institute_name_12", validators=[InputRequired(), Length(min=5, max=50)])
     
+
+# def admin_required(func):
+#     """
+#     Modified login_required decorator to restrict access to admin group.
+#     """
+
+#     @wraps(func)
+#     def decorated_view(*args, **kwargs):
+#         if current_user.get_group() != 0:        # zero means admin, one and up are other groups
+#             return redirect(url_for('index'))
+#         return func(*args, **kwargs)
+#     return decorated_view
+
+
+# @app.route("/admin-restricted")
+# @login_required
+# def admin_resource():
+#     return "Hello admin"
 
 
 @app.route("/")
@@ -185,12 +205,11 @@ def index():
 
 
 
-# @app.route("/list_student")
+# @app.route("/admin_dash")
 # @login_required
-# def list_stu():
-#     students = Student.query.all()
+# def admin_login():
 
-#     return render_template('add_student.html', students=students)
+#     return render_template('admin_dash.html', name = current_user.username)
 
 
 
@@ -222,7 +241,8 @@ def signup():
             username=form.username.data, 
             email=form.email.data, 
             password=hashed_pass,
-            institution=form.institution.data)
+            institution=form.institution.data,
+            regdid = form.regdid.data)
         
         try:
             db.session.add(new_student)
@@ -273,3 +293,4 @@ def about_us():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
