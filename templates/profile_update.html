@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ODISHA ALUMNI | PROFILE</title>
+    <link rel="stylesheet" href="{{ url_for('.static', filename='profile_update.css') }}">
+</head>
+<body>
+    <section class="head">Update Your Profile</section>
+    <div class="form--wrapper">
+        <form action="" method="post" class="update-form">
+            {{form.csrf_token}}
+            {{ form.institute_name_10(class_='name', placeholder='10th institute name') }}
+            {{ form.institute_pass_10(class_='name', placeholder='10th passing year') }}
+            {{ form.institute_name_12(class_='name', placeholder='12th institute name') }}
+            {{ form.institute_pass_12(class_='name', placeholder='12th passing year') }}
+            {{ form.residence(class_='name', placeholder='residence') }}
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                <div class=flashes>{{ message }}</div>
+                <a class="redir" href="{{url_for('dash')}}">
+                    <button id="outside" class="form--btn">Sign Up</button>
+                </a>
+                {% endfor %}
+            {% endif %}
+            {% endwith %} 
+            <!-- <input type="text", placeholder="10th institute name">
+            <input type="text", placeholder="10th passing year">
+            <input type="text", placeholder="12th institute name">
+            <input type="text", placeholder="12th passing year">
+            <input type="text" placeholder="current residence"> -->
+            <input type="submit" value="Update Profile">
+        </form>
+
+    </div>
+    
+</body>
+</html>

@@ -2,8 +2,8 @@ from functools import wraps
 from sqlalchemy.exc import IntegrityError
 from flask import Flask, flash, render_template, redirect, url_for
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField
-from wtforms.validators import InputRequired, Email, Length
+from wtforms import StringField, PasswordField, BooleanField, IntegerField
+from wtforms.validators import InputRequired, Email, Length, NumberRange
 from flask_sqlalchemy import SQLAlchemy
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -18,6 +18,12 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(30), unique=True)
     institution = db.Column(db.String(40))
+    institute_name_10 = db.Column(db.String(40))
+    institute_pass_10 = db.Column(db.Integer)
+    institute_name_12 = db.Column(db.String(40))
+    institute_pass_12 = db.Column(db.Integer)
+    residence = db.Column(db.String(50))
+
 
 
 class Admin(db.Model, UserMixin):
@@ -93,6 +99,15 @@ class AdminRegistrationForm(FlaskForm):
 class StudentDetailForm(FlaskForm):
     name = StringField("name", validators=[InputRequired(), Length(min=4, max=40)])
     email = StringField("email", validators=[InputRequired(), Email(message="Invalid Email")])
+
+
+class UpdateProfileForm(FlaskForm):
+    institute_name_10 = StringField("institute_name_10", validators=[InputRequired(), Length(min=4, max=40)])
+    institute_pass_10 = IntegerField("institute_grade_10", validators=[InputRequired(), NumberRange(min=1900, max=2100)])
+    institute_name_12 = StringField("institute_name_12", validators=[InputRequired(), Length(min=4, max=40)])
+    institute_pass_12 = IntegerField("institute_grade_12", validators=[InputRequired(), NumberRange(min=1900, max=2100)])
+    residence = StringField("institute_name_12", validators=[InputRequired(), Length(min=5, max=50)])
+    
 
 
 @app.route("/")
@@ -219,6 +234,29 @@ def signup():
 @login_required
 def dash():
     return render_template('dashboard.html', name = current_user.username)
+
+
+@app.route("/profile_update", methods=['GET', 'POST'])
+@login_required
+def update():
+    
+    form = UpdateProfileForm()
+    student = User.query.filter_by(id=current_user.id).first()
+    if form.validate_on_submit():
+        
+        upd = student(
+            institute_name_10 = form.institute_name_10.data,
+            institute_pass_10 = form.institute_pass_10.data,
+            institute_name_12 = form.institute_name_12.data,
+            institute_pass_12 = form.institute_pass_12.data,
+            residence = form.residence.data
+        )
+
+        db.session.add(upd)
+        db.session.commit()
+        flash("Profile Updated")
+    return render_template('profile_update.html', form=form)
+    
 
 
 @app.route("/logout")

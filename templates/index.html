@@ -1,21 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ODISHA ALUMNI PORTAL</title>
-</head>
-<body>
-    <h1>WELCOME TO ODISHA ALUMNI PORTAL</h1>
-    <a href="{{url_for('login')}}">LOGIN</a>
-    <a href="{{url_for('signup')}}">SIGNUP</a>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        {% for message in messages %}
-        <div class="flashes">{{ message }}</div>
-        {% endfor %}
-    {% endif %}
-    {% endwith %}
-</body>
-</html>
+    <html>
+    <head>
+        <title>LOG IN</title>
+        <link rel="stylesheet" href="{{ url_for('.static', filename='index.css') }}">
+        <link rel="stylesheet" href="{{ url_for('.static', filename='animate.css') }}">
+    </head>
+    <style>
+        .btn{
+            float:right;
+           padding: 10px;
+           border: black;
+           font-family:"montserrat";
+           border-radius: 20px;
+           width: 100px;
+           }
+           .btn:hover{
+               cursor: pointer;
+               background:burlywood;
+           }
+    </style>
+    <body bgcolor="whitesmoke">
+    <div class="aa">
+    <div class="fgf">
+        <input type="button" value="BACK" class="btn" onclick="window.location.href='index.php' ;">
+    </div>
+    
+    <div class="bg">
+       
+        <div class="cen">
+            <h2 class="ab wow zoomIn"><u>ADMINISTRATOR</u></h2>
+            <p class="ba wow flash" style="font-size: 20px; color: rgb(23, 22, 22);">Select the correct login profession based on your professional status</p>
+            <div class="xy">
+            <ul class="cd wow zoomIn">
+                <li><img src="http://www.renukacollege.org/adminlogin/img/admin-login-icon-15.png" width="115" height="115;"></li>
+                <li><img src="http://hryedumis.gov.in/user/pages/images/login/applicant.png" width="115" height="115;"></li>
+                <li><img src="http://www.rawalphysicsacademy.co.in/images/Student.png" width="115" height="115;"></li>
+            </ul>    
+            <ul style="text-align: center;">
+                <li><a href="#">ADMIN</a></li>
+                <li><a href="#">ALUMNI</a></li>
+                <li><a href="{{ url_for('login') }}">STUDENT</a></li>
+                
+            </ul>
+            </div>
+           </div>
+             <br>
+            </div>
+            <br><div class="contact">
+                <h2 align="center"><b>CONTACT US</b></h2>
+                <div id="add">
+                <br>
+                <img class="akg1" src="https://bit.ly/2qEsHcG">
+                <address title=" Address ">
+                    OUTR,<br>
+                   BBSR<br>
+                    
+                </address>
+                <br>
+                <img class="akg1" src="https://bit.ly/36CxFH1">
+                 <h3>1234567890</h3>
+                 
+                 <br>
+                </div>
+                <div class="vl">
+                <div id="ima">
+                        <h3><b>CLICK to visit or contact us</b></h3>
+                        <h4>xyz@gmail.com</h4>
+                </div>
+                </div>
+                <div class="vl1">
+                    <div id="right">
+                        <h3>DEVELOPED BY</h3>
+                        <h3>TEAM JOSH</h3>
+
+                        
+                    </div>
+                </div>
+            </div>
+   
+    <script src="js/wow.min.js"></script>
+    
+    <script> new WOW().init(); </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jq uery.waypoints.min.js" integrity="sha256-jDnOKI0q2KNsQZTcBTEnsp76FnfME ttF6AV2DF2FFNE crossorigin="anonymous"></script> </body>
+    
+    </html>
