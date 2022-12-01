@@ -4,31 +4,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ODISHA ALUMNI | DASHBOARD</title>
-    <link rel="stylesheet" href="{{ url_for('.static', filename='dash.css') }}">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" /> -->
+    <title>sidebar</title>
+    <link rel="stylesheet" href="{{ url_for('.static', filename='dashboard.css')}}">
 
     <script src="../static/js/jquery-3.6.1.min.js"></script>
 </head>
 <body>
 
+    
     <div class="wrap">
 
-    <div class="sidebar">
-        <!--<div id="menu" onclick="myFunction()">-->
-            <img src="../static/menu icon.png" alt="" id="menu">
-        
-        <div class="h--wrap">
-            <h1>Dashboard</h1>
+        <div class="logo">
+            <img src="../static/logo.jpg" alt="">
         </div>
+
+            
+        <div class="topnav">
+            <input type="text" placeholder="Search..">
+        </div>
+
+    <div class="sidebar">
+            <img src="../static/menu icon.png" alt="" id="menu">
+            <div id="google_translate_element"></div>
+            <script type="text/javascript">
+                function googleTranslateElementInit() {
+                  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+                }
+                </script>
+                
+                <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                
         
+       
+        <h1>Dashboard</h1>
+        <div>Hello, {{ name }}</div>
         <ul>
-            <li>Hello, {{name}}</li>
-            <li><a href="{{ url_for('update') }}">Profile</a></li>
-            <li><a href="">Chat</a></li>
-            <li><a href="">Events</a></li>
+            <li><a href="">Home</a></li>
+            <li><a href="{{ url_for('update') }}">profile</a></li>
+            <li><a href="{{ url_for('about_us') }}">About us</a></li>
+            <li><a href="">chat</a></li>
             <li><a href="">Contact Us</a></li>
-            <li><a href="">About Us</a></li>
-            <li><a href="{{ url_for('logout') }}">Sign out</a></li>
+            <li><a href="{{ url_for('logout') }}">sign out</a></li>
 
 
         </ul>
@@ -46,8 +63,12 @@
               
            });
         });
-        //function myFunction(){
-        //document.getElementById("menu").style.display = "none";}
       </script>
+  
+     
+
+   
+    
+    
 </body>
 </html>

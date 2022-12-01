@@ -24,6 +24,12 @@ class User(db.Model, UserMixin):
     institute_pass_12 = db.Column(db.Integer)
     residence = db.Column(db.String(50))
 
+    def get_id(self):
+        return str(self.id)
+    
+    def __repr__(self) -> str:
+        return self.username
+
 
 
 class Admin(db.Model, UserMixin):
@@ -230,32 +236,24 @@ def signup():
     
     return render_template('sign-up.html', form=form)
 
-@app.route("/dashboard")
-@login_required
-def dash():
-    return render_template('dashboard.html', name = current_user.username)
-
 
 @app.route("/profile_update", methods=['GET', 'POST'])
 @login_required
 def update():
     
-    form = UpdateProfileForm()
-    student = User.query.filter_by(id=current_user.id).first()
+    event = User.query.get(int(current_user.get_id()))
+    form = UpdateProfileForm(obj=event)
     if form.validate_on_submit():
-        
-        upd = student(
-            institute_name_10 = form.institute_name_10.data,
-            institute_pass_10 = form.institute_pass_10.data,
-            institute_name_12 = form.institute_name_12.data,
-            institute_pass_12 = form.institute_pass_12.data,
-            residence = form.residence.data
-        )
-
-        db.session.add(upd)
+        form.populate_obj(event)
         db.session.commit()
         flash("Profile Updated")
     return render_template('profile_update.html', form=form)
+
+
+@app.route("/dashboard")
+@login_required
+def dash():
+    return render_template('dashboard.html', name = current_user.username)
     
 
 
@@ -266,6 +264,11 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+
+@app.route("/about")
+@login_required
+def about_us():
+    return render_template('aboutus.html')
 
 
 if __name__ == "__main__":

@@ -21,8 +21,7 @@
             {% if messages %}
                 {% for message in messages %}
                 <div class=flashes>{{ message }}</div>
-                <a class="redir" href="{{url_for('dash')}}">
-                    <button id="outside" class="form--btn">Sign Up</button>
+                <a class="redir" href="{{url_for('dash')}}">go to dashboard
                 </a>
                 {% endfor %}
             {% endif %}

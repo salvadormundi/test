@@ -4,6 +4,13 @@
 }
 
 
+form--wrapper{
+    display: flex;
+    justify-content: center;
+    height: 90vh;
+    align-items: center;
+}
+
 
 .update-form{
     display: grid;

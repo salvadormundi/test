@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>about</title>
+  <link rel="stylesheet" href="{{ url_for('.static', filename='aboutus.css') }}">
+</head>
+<body>
+  <div class="about-section">
+    <h1>About Us</h1>
+    <p>One of the things that makes any institution great is the number 
+      of friendships and memories that students create. 
+      Alumni associations are important since they help keep alumni connected with their school. 
+      They provide a forum for former students to share their experiences and collaborate on common goals, 
+      and helps create initiatives that unite the various classes of graduates. 
+      The strength of such association is established on the level of engagement and involvement 
+      of its members. Alumni associations are beneficial to all involved because they provide 
+      a support system for fellow graduates, present students, and the organizations they graduated from. 
+      EduRed is an Alumni Association for students and alumni likewise who can network and communicate 
+      to help each other succeed in the future.</p>
+      <a href="{{ url_for('dash') }}"> Go back to dashboard</a>
+  </div>
+  
+</body>
+</html>

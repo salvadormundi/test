@@ -13,6 +13,13 @@
         <div class="container">
             <form action="" method="post" class="login--form">
                 {{form.csrf_token}}
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="flashes">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %} 
                 <div class="title">Alumni Portal</div>
                 <div class="subtitle">Log In</div>
                 {{ form.username(class_='name', placeholder='Name') }}
@@ -25,19 +32,12 @@
                     <!-- <input type="checkbox" value="remember-me" class="remember"> Remember me -->
                     
                 </label>
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                    <div class=flashes>{{ message }}</div>
-                    {% endfor %}
-                {% endif %}
-                {% endwith %} 
-                
                 <input type="submit" value="Log In" class="form--btn" formaction="#">
             </form>
             <a class="redir" href="{{url_for('signup')}}">
                 <button id="outside" class="form--btn">Sign Up</button>
             </a>
+            
         </div>
     </section>
 </body>

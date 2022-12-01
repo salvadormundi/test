@@ -69,7 +69,7 @@ body{
 
 .name, .pass{
     position: relative;
-    top: 40%;
+    top: 50%;
     width: 250px;
     height: 40px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -113,4 +113,5 @@ body{
 .error, .flashes{
     color: brown;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    height: 2%;
 }
